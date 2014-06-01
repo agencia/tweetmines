@@ -6,7 +6,7 @@ import argparse
 import codecs
 import json
 import pymongo
-import urllib
+import urllib2
 from pprint import PrettyPrinter
 import sys
 from pymongo import MongoClient
@@ -29,7 +29,9 @@ def checkin_getter_thread(thisActivitie, numero, thisClient):
         else:
             checkin = thisClient.checkins(str(thisActivitie["checkin_id"]),params={'signature':str(thisActivitie["signature"])})
         thisActivitie["checkin"] = checkin
-        print "location is {}".format(checkin["checkin"]["venue"]["location"]["lat"],checkin["checkin"]["venue"]["location"]["lng"])
+        #print "location is {},{}".format(checkin["checkin"]["venue"]["location"]["lat"],checkin["checkin"]["venue"]["location"]["lng"])
+        urllib2.urlopen("http://agenciaunica.com/setpin?pin={},{}".format(checkin["checkin"]["venue"]["location"]["lat"],checkin["checkin"]["venue"]["location"]["lng"]))
+
         db.activities.save(thisActivitie)
         print "ha finalizado el hilo {}, checkin_id: {}, CC: {}".format(numero, thisActivitie["checkin_id"],checkin["checkin"]["venue"]["location"]["cc"])
         #print 'rate remaining {0}'.format(thisClient.rate_remaining)
