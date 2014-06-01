@@ -62,7 +62,7 @@ if __name__ == '__main__':
 	    print('*** STOPED %s' % str(e))
 
     try:
-        clients = accounts.find({}).sort('usage', 1)
+        clients = accounts.find({}).sort('usage', -1)
         i=0
         for account in clients:
             client_4sqr = foursquare.Foursquare(client_id=account['client_id'], client_secret=account['secret'], version='20140423')
