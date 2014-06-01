@@ -65,7 +65,7 @@ if __name__ == '__main__':
         clients = accounts.find({}).sort('usage', 1)
         i=0
         for account in clients:
-            client_4sqr = foursquare.Foursquare(client_id=account['client_id'], client_secret=account['secret'], version='20140304')
+            client_4sqr = foursquare.Foursquare(client_id=account['client_id'], client_secret=account['secret'], version='20140423')
             #print 'rate remaining {0}'.format(client_4sqr.rate_remaining())
             inicio = datetime.datetime.utcnow()
             try:
