@@ -73,13 +73,13 @@ if __name__ == '__main__':
 	    print('*** STOPED %s' % str(e))
     try:
         i = 0;
-        for a in range(100):
+        for a in range(5000):
             lastTweets = tweets.find({'over_expanded_url': { '$exists': False }}).limit(1000)
             for lastTweet in lastTweets:
                 t = threading.Thread(target=url_expander_thread, args=(lastTweet, i)) 
                 t.start()
                 i+=1
-                if (i % 30) == 0 : 
+                if (i % 50) == 0 : 
                     t.join()
                 
     except Exception as e:
