@@ -4,7 +4,6 @@ __license__ = "MIT"
 
 import argparse
 import codecs
-import json
 import pymongo
 import urllib2
 from pprint import PrettyPrinter
