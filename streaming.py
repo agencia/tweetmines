@@ -4,6 +4,7 @@ __license__ = "MIT"
 
 import argparse
 import codecs
+import json
 import pymongo
 import urllib2
 from pprint import PrettyPrinter
@@ -79,4 +80,4 @@ if __name__ == '__main__':
                 print('\nTerminated by user')
                 
         except Exception as e:
-                print('*** STOPPED %s on request' % str(e))
+                print '*** STOPPED {} on request {}'.format( str(e), str(r))
