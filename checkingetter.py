@@ -30,7 +30,7 @@ def checkin_getter_thread(thisActivitie, numero, thisClient):
             checkin = thisClient.checkins(str(thisActivitie["checkin_id"]),params={'signature':str(thisActivitie["signature"])})
         thisActivitie["checkin"] = checkin
         #print "location is {},{}".format(checkin["checkin"]["venue"]["location"]["lat"],checkin["checkin"]["venue"]["location"]["lng"])
-        urllib2.urlopen("http://agenciaunica.com/setpin?pin={},{}".format(checkin["checkin"]["venue"]["location"]["lat"],checkin["checkin"]["venue"]["location"]["lng"]))
+        #urllib2.urlopen("http://agenciaunica.com/setpin?pin={},{}".format(checkin["checkin"]["venue"]["location"]["lat"],checkin["checkin"]["venue"]["location"]["lng"]))
 
         db.activities.save(thisActivitie)
         print "ha finalizado el hilo {}, checkin_id: {}, CC: {}".format(numero, thisActivitie["checkin_id"],checkin["checkin"]["venue"]["location"]["cc"])
@@ -76,7 +76,7 @@ if __name__ == '__main__':
                     t = threading.Thread(target=checkin_getter_thread, args=(lastActivitie, i, client_4sqr)) 
                     t.start()
                     i+=1
-                    if (i % 30) == 0 : 
+                    if (i % 50) == 0 : 
                         t.join()
             except Exception as e:
                 print('*** STOPPED %s' % str(e))
