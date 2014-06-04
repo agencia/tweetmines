@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
         try:
                 params = to_dict(args.parameters)
-                oauth = TwitterOAuth.read_file('./credentials2.txt')
+                oauth = TwitterOAuth.read_file('./credentials.txt')
                 api = TwitterAPI(oauth.consumer_key, oauth.consumer_secret, oauth.access_token_key, oauth.access_token_secret)
                 
                 r = api.request('statuses/filter', {'track':'4sq com, 4sq com'})
