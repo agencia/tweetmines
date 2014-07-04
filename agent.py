@@ -8,7 +8,7 @@ import json
 import pymongo
 from pprint import PrettyPrinter
 import sys
-from TwitterAPI import TwitterAPI, TwitterOAuth
+from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRestPager
 from pymongo import MongoClient
 
 
@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
         try:
             client = MongoClient('localhost', 27017)
-            db = client['tweets']
+            db = client['devtweets']
             tweets = db.tweets
         except Exception as e:
                 print('*** STOPPED %s' % str(e))
@@ -63,30 +63,18 @@ if __name__ == '__main__':
         try:
                 params = to_dict(args.parameters)
                 oauth = TwitterOAuth.read_file('./credentials.txt')
-
                 api = TwitterAPI(oauth.consumer_key, oauth.consumer_secret, oauth.access_token_key, oauth.access_token_secret)
-                
-                response = api.request('statuses/filter', {'locations':'-102.878723,21.659981,-101.997757,22.473779'})
-                """
-                pp = PrettyPrinter()
-                for item in response.get_iterator():
-                        if 'message' in item:
-                                print('ERROR %s: %s' % (item['code'], item['message']))
-                        elif not args.fields:
-                                pp.pprint(item)
-                        else:
-                                for name in args.fields:
-                                        value = search(name, item)
-                                        if value:
-                                                       print('%s: %s' % (name, value))
-                
-                r = json.loads(response.text)
-                print(r.keys())
-                print(r["statuses"][0].keys())
-                tweets.insert(r["statuses"])
-                print(response.text)"""
-				for item in response.get_iterator():
-				    print item
+                """response = api.request('statuses/filter', {'locations':'-102.878723,21.659981,-101.997757,22.473779'})"""
+                #response = api.request('search/tweets', {'q':'Aguascalientes 4sq com, ags 4sq com', 'count': 450})
+                lastTweet = tweets.find({}).sort('id', -1).limit(1)
+                str_lastTweetId = str(lastTweet[0]["id"])
+                pager = TwitterRestPager(api, 'search/tweets', {'q':'Aguascalientes 4sq com, ags 4sq com', 'count':100, 'since_id': str_lastTweetId})
+
+                #for item in response.get_iterator():
+                for item in pager.get_iterator(10):
+                    print item
+                    tweets.insert(item)
+                    #print ('\n' % pager.get_rest_quota())
 				
         except KeyboardInterrupt:
                 print('\nTerminated by user')
