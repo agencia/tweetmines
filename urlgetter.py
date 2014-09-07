@@ -6,7 +6,7 @@ import argparse
 import codecs
 import json
 import pymongo
-import urllib2
+import urllib
 from pprint import PrettyPrinter
 import sys
 from pymongo import MongoClient
