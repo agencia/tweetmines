@@ -65,11 +65,11 @@ if __name__ == '__main__':
                 oauth = TwitterOAuth.read_file('./credentials.txt')
                 api = TwitterAPI(oauth.consumer_key, oauth.consumer_secret, oauth.access_token_key, oauth.access_token_secret)
                 
-                r = api.request('statuses/filter', {'track':'4sq com, 4sq com'})
+                r = api.request('statuses/filter', {'track':'4sq com'})
 
                 #for item in response.get_iterator():
                 for item in r:
-                    #print(item['id'] if 'id' in item else item)
+                    print(item['id'] if 'id' in item else item)
                     #resp = urllib.urlopen(item["entities"]["urls"][0]["expanded_url"])
                     #item["entities"]["urls"][0]["over_expanded_url"] = resp.url
                     tweets.insert(item)
