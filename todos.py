@@ -77,7 +77,7 @@ if __name__ == '__main__':
                 #for item in response.get_iterator():
 
                 for item in pager.get_iterator(5):
-                    print "%d \n" % item["id"]
+                    print('%d \n' % item["id"])
                     #resp = urllib.urlopen(item["entities"]["urls"][0]["expanded_url"])
                     #item["entities"]["urls"][0]["over_expanded_url"] = resp.url
                     tweets.insert(item)
