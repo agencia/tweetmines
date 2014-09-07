@@ -58,7 +58,7 @@ if __name__ == '__main__':
             db = client['todos_tweets']
             tweets = db.tweets
         except Exception as e:
-                print('*** STOPPED %s' % str(e))
+                print('*** STOPPED %s on db' % str(e))
             
 
         try:
@@ -80,4 +80,4 @@ if __name__ == '__main__':
                 print('\nTerminated by user')
                 
         except Exception as e:
-                print('*** STOPPED %s' % str(e))
+                print '*** STOPPED {} on request {}'.format( str(e), str(r.status_code))

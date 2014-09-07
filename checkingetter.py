@@ -6,7 +6,8 @@ import argparse
 import codecs
 import json
 import pymongo
-import urllib
+import urllib2
+>>>>>>> 345ecd155c2293bd46de1b3ce0f19d621247382f
 from pprint import PrettyPrinter
 import sys
 from pymongo import MongoClient
@@ -29,6 +30,7 @@ def checkin_getter_thread(thisActivitie, numero, thisClient):
         else:
             checkin = thisClient.checkins(str(thisActivitie["checkin_id"]),params={'signature':str(thisActivitie["signature"])})
         thisActivitie["checkin"] = checkin
+
         db.activities.save(thisActivitie)
         print "ha finalizado el hilo {}, checkin_id: {}, CC: {}".format(numero, thisActivitie["checkin_id"],checkin["checkin"]["venue"]["location"]["cc"])
         #print 'rate remaining {0}'.format(thisClient.rate_remaining)
@@ -64,7 +66,9 @@ if __name__ == '__main__':
         clients = accounts.find({}).sort('usage', 1)
         i=0
         for account in clients:
-            client_4sqr = foursquare.Foursquare(client_id=account['client_id'], client_secret=account['secret'], version='20140304')
+            client_4sqr = foursquare.Foursquare(client_id=account['client_id'], client_secret=account['secret'], version='20140423')
+
+
             #print 'rate remaining {0}'.format(client_4sqr.rate_remaining())
             inicio = datetime.datetime.utcnow()
             try:
@@ -73,7 +77,8 @@ if __name__ == '__main__':
                     t = threading.Thread(target=checkin_getter_thread, args=(lastActivitie, i, client_4sqr)) 
                     t.start()
                     i+=1
-                    if (i % 6) == 0 : 
+
+                    if (i % 50) == 0 : 
                         t.join()
             except Exception as e:
                 print('*** STOPPED %s' % str(e))
