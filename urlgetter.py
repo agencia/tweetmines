@@ -13,7 +13,7 @@ from pymongo import MongoClient
 import threading
 
 def url_expander_thread(thisTweet,numero):
-    #print("iniciando hilo %s " % str(numero))
+    #Xprint("iniciando hilo %s " % str(numero))
     try:
             client = MongoClient('localhost', 27017)
             db = client['todos_tweets']
@@ -73,8 +73,8 @@ if __name__ == '__main__':
 	    print('*** STOPED %s' % str(e))
     try:
         i = 0;
-        for a in range(5):
-            lastTweets = tweets.find({'over_expanded_url': { '$exists': False }}).limit(1)
+        for a in range(5000):
+            lastTweets = tweets.find({'over_expanded_url': { '$exists': False }}).limit(1000)
             for lastTweet in lastTweets:
                 t = threading.Thread(target=url_expander_thread, args=(lastTweet, i)) 
                 t.start()
