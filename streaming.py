@@ -80,4 +80,4 @@ if __name__ == '__main__':
                 print('\nTerminated by user')
                 
         except Exception as e:
-                print '*** STOPPED ' + str(e) + ' on request ' + str(r.status_code)
+                print ('*** STOPPED ' + str(e) + ' on request ' + str(r.status_code))
