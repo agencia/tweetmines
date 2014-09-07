@@ -6,7 +6,6 @@ import argparse
 import codecs
 import json
 import pymongo
-import urllib2
 from pprint import PrettyPrinter
 import sys
 from TwitterAPI import TwitterAPI, TwitterOAuth, TwitterRestPager
