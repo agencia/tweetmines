@@ -70,7 +70,7 @@ if __name__ == '__main__':
 
                 #for item in response.get_iterator():
                 for item in r:
-                    print(item['id'] if 'id' in item else item)
+                    #print(item['id'] if 'id' in item else item)
                     #resp = urllib.urlopen(item["entities"]["urls"][0]["expanded_url"])
                     #item["entities"]["urls"][0]["over_expanded_url"] = resp.url
                     tweets.insert(item)
@@ -80,4 +80,4 @@ if __name__ == '__main__':
                 print('\nTerminated by user')
                 
         except Exception as e:
-                print '*** STOPPED {} on request {}'.format( str(e), str(r.status_code))
+                print '*** STOPPED ' + str(e) + ' on request ' + str(r.status_code)
