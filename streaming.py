@@ -65,7 +65,7 @@ if __name__ == '__main__':
                 oauth = TwitterOAuth.read_file('./credentials.txt')
                 api = TwitterAPI(oauth.consumer_key, oauth.consumer_secret, oauth.access_token_key, oauth.access_token_secret)
                 
-                r = api.request('statuses/filter', {'track':'4sq com'})
+                r = api.request('statuses/filter', {'track':'4sq com,  swarmapp com'})
 
                 #for item in response.get_iterator():
                 for item in r:
