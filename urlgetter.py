@@ -13,7 +13,7 @@ from pymongo import MongoClient
 import threading
 
 def url_expander_thread(thisTweet,numero):
-    print("iniciando hilo %s " % str(numero))
+    #print("iniciando hilo %s " % str(numero))
     try:
             client = MongoClient('localhost', 27017)
             db = client['todos_tweets']
