@@ -50,7 +50,7 @@ def url_expander_thread(thisTweet,numero):
         db.tweets.remove(thisTweet)
         db.activities.insert(activitie)
         #print "checkin {}, signature {}, url {}".format(checkin_id, signature, str_url)
-        print("ha finalizado el hilo %s " % str(numero))
+        #print("ha finalizado el hilo %s " % str(numero))
     except Exception as e:
         print('*** STOPED %s' % str(e))
     
@@ -79,7 +79,7 @@ if __name__ == '__main__':
                 t = threading.Thread(target=url_expander_thread, args=(lastTweet, i)) 
                 t.start()
                 i+=1
-                if (i % 30) == 0 : 
+                if (i % 50) == 0 : 
                     t.join()
                 
     except Exception as e:
