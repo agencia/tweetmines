@@ -75,11 +75,8 @@ if __name__ == '__main__':
                     pager = TwitterRestPager(api, 'search/tweets', {'q':'4sq com', 'count':100, 'since_id': str_lastTweetId})
 
                 #for item in response.get_iterator():
-<<<<<<< HEAD
-                for item in pager.get_iterator(10):
-=======
+
                 for item in pager.get_iterator(5):
->>>>>>> 345ecd155c2293bd46de1b3ce0f19d621247382f
                     print "%d \n" % item["id"]
                     #resp = urllib.urlopen(item["entities"]["urls"][0]["expanded_url"])
                     #item["entities"]["urls"][0]["over_expanded_url"] = resp.url
