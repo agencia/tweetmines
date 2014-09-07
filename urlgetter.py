@@ -22,7 +22,7 @@ def url_expander_thread(thisTweet,numero):
 	    
     #print thisTweet["_id"]
     #print "\n%s" % (thisTweet["entities"]["urls"][-1]["expanded_url"])
-    resp = urllib2.urlopen(thisTweet["entities"]["urls"][-1]["expanded_url"])
+    resp = urllib.urlopen(thisTweet["entities"]["urls"][-1]["expanded_url"])
     str_url = resp.geturl()
     thisTweet["over_expanded_url"] = str_url
     
@@ -73,8 +73,8 @@ if __name__ == '__main__':
 	    print('*** STOPED %s' % str(e))
     try:
         i = 0;
-        for a in range(500):
-            lastTweets = tweets.find({'over_expanded_url': { '$exists': False }}).limit(1000)
+        for a in range(5):
+            lastTweets = tweets.find({'over_expanded_url': { '$exists': False }}).limit(1)
             for lastTweet in lastTweets:
                 t = threading.Thread(target=url_expander_thread, args=(lastTweet, i)) 
                 t.start()
