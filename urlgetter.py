@@ -6,7 +6,7 @@ import argparse
 import codecs
 import json
 import pymongo
-import urllib
+import urllib.request 
 from pprint import PrettyPrinter
 import sys
 from pymongo import MongoClient
@@ -22,7 +22,7 @@ def url_expander_thread(thisTweet,numero):
 	    
     #print thisTweet["_id"]
     #print "\n%s" % (thisTweet["entities"]["urls"][-1]["expanded_url"])
-    resp = urllib.urlopen(thisTweet["entities"]["urls"][-1]["expanded_url"])
+    resp = urllib.request.urlopen(thisTweet["entities"]["urls"][-1]["expanded_url"])
     str_url = resp.geturl()
     thisTweet["over_expanded_url"] = str_url
     
